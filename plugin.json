@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "planneragent001@gmail.com",
+    "name": "Planner Agent"
+  },
+  "description": "Reflect on an actual completed or blocked cycle and propose the next intent or earned constraint.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [],
+        "category": "Developer Tools",
+        "defaultPrompt": "For every actionable request, resolve the real Agent -> Plugin -> Skill -> Function. When the installed Hook Agent is available, allow it to autonomously emit and attempt only the applicable lifecycle functions above target execution. Invoke the real target capability and verify evidence. Hook emission is not execution; unavailable lifecycle providers return NOT_INVOKED.",
+        "developerName": "Planner Agent",
+        "displayName": "Reflector Agent",
+        "longDescription": "Reflect on an actual completed or blocked cycle and propose the next intent or earned constraint.",
+        "shortDescription": "Reflect on PMCR-O cycles"
+      }
+    }
+  },
+  "keywords": [
+    "pmcro",
+    "agent",
+    "governance"
+  ],
+  "name": "reflector",
+  "version": "0.1.0"
+}

@@ -1,2 +1,4 @@
-# reflector-agent
-PMCR-O reflector-agent marketplace agent repository
+# Reflector Agent
+
+Canonical plugin: `reflector`.
+Human handle: `@reflector-agent`.
