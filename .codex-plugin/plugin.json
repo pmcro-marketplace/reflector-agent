@@ -1,9 +1,4 @@
 {
-  "author": {
-    "email": "planneragent001@gmail.com",
-    "name": "Planner Agent"
-  },
-  "description": "Reflect on an actual completed or blocked cycle and propose the next intent or earned constraint.",
   "interface": {
     "capabilities": [],
     "category": "Developer Tools",
@@ -13,12 +8,17 @@
     "longDescription": "Reflect on an actual completed or blocked cycle and propose the next intent or earned constraint.",
     "shortDescription": "Reflect on PMCR-O cycles"
   },
+  "name": "reflector",
+  "version": "0.1.0",
+  "description": "Reflect on an actual completed or blocked cycle and propose the next intent or earned constraint.",
+  "author": {
+    "name": "Planner Agent",
+    "email": "planneragent001@gmail.com"
+  },
   "keywords": [
     "pmcro",
     "agent",
     "governance"
   ],
-  "name": "reflector",
-  "skills": "./skills",
-  "version": "0.1.0"
+  "skills": "./skills"
 }
