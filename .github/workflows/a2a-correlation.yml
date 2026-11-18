@@ -1,0 +1,47 @@
+name: Reflector A2A Correlation Proof
+
+on:
+  push:
+    branches: ["claude/a2a-correlation"]
+  pull_request:
+    paths:
+      - "services/a2a/**"
+      - ".github/workflows/a2a-correlation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  correlation-proof:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - name: Build host and probe
+        run: |
+          dotnet build services/a2a/ReflectorAgent.Host/ReflectorAgent.Host.csproj -c Release --nologo
+          dotnet build services/a2a/ReflectorAgent.Probe/ReflectorAgent.Probe.csproj -c Release --nologo
+      - name: Start A2A host
+        env:
+          ASPNETCORE_URLS: http://127.0.0.1:5095
+          A2A_PUBLIC_BASE_URL: http://127.0.0.1:5095
+        run: |
+          dotnet run --project services/a2a/ReflectorAgent.Host/ReflectorAgent.Host.csproj -c Release --no-build > /tmp/a2a.log 2>&1 &
+          echo $! > /tmp/a2a.pid
+      - name: Wait for health
+        run: |
+          for i in $(seq 1 30); do
+            curl --fail --silent http://127.0.0.1:5095/healthz > /tmp/health.json && { cat /tmp/health.json; exit 0; }
+            sleep 1
+          done
+          cat /tmp/a2a.log
+          exit 1
+      - name: Verify exact correlation preservation
+        run: dotnet run --project services/a2a/ReflectorAgent.Probe/ReflectorAgent.Probe.csproj -c Release --no-build -- http://127.0.0.1:5095 --correlation
+      - name: Stop host
+        if: always()
+        run: |
+          test ! -f /tmp/a2a.pid || kill "$(cat /tmp/a2a.pid)" || true
+          cat /tmp/a2a.log || true
