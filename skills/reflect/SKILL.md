@@ -1,6 +1,6 @@
 ---
 name: reflect
-description: Reflect on an actual completed or blocked cycle and propose the next intent or earned constraint.
+description: Reflect on an actual completed or blocked cycle and propose the next intent or earned constraint. USE FOR recording evidence-earned lessons and proposing the next bounded intent after a cycle disposition. DO NOT USE FOR planning, making, checking, or dispatching the next cycle; use the corresponding PMCR-O role.
 ---
 # reflect
 
@@ -33,4 +33,4 @@ A PASS requires actual evidence. An emitted invocation, route, plan, or declared
 Emission is not invocation. The installed Hook Agent may surround this role but does not replace its business function.
 
 ## Resources
-See `references/contract.md` and `assets/request.json`.
+See `references/contract.md`, `assets/request.json`, and `scripts/validate.py`.
