@@ -1,0 +1,66 @@
+{
+    "name":  "Reflector Agent",
+    "description":  "Reflect on an actual completed or blocked cycle and propose the next intent or earned constraint.",
+    "version":  "0.1.0",
+    "provider":  {
+                     "organization":  "PMCR-O AI Agent Company",
+                     "url":  "https://github.com/pmcro-marketplace"
+                 },
+    "documentationUrl":  "https://github.com/pmcro-marketplace/reflector-agent/blob/main/README.md",
+    "supportedInterfaces":  [
+                                {
+                                    "url":  "https://pmcro-marketplace.github.io/reflector-agent/a2a",
+                                    "protocolBinding":  "JSONRPC",
+                                    "protocolVersion":  "1.0"
+                                }
+                            ],
+    "capabilities":  {
+                         "streaming":  false,
+                         "pushNotifications":  false,
+                         "extendedAgentCard":  false,
+                         "extensions":  [
+                                            {
+                                                "uri":  "pmcro/lifecycle/v1",
+                                                "description":  "PMCR-O lifecycle extension. Hook Agent may emit lifecycle functions above target execution; emission is not execution.",
+                                                "required":  false
+                                            }
+                                        ]
+                     },
+    "defaultInputModes":  [
+                              "text/plain"
+                          ],
+    "defaultOutputModes":  [
+                               "text/plain"
+                           ],
+    "securitySchemes":  {
+                            "apiKey":  {
+                                           "apiKeySecurityScheme":  {
+                                                                        "name":  "X-Api-Key",
+                                                                        "location":  "header",
+                                                                        "description":  "API key passed as X-Api-Key header"
+                                                                    }
+                                       }
+                        },
+    "skills":  [
+                   {
+                       "id":  "reflect",
+                       "name":  "Reflect",
+                       "description":  "Record Checker evidence, preserve truthful limits, and emit exactly one proposed but unexecuted next seed for the next cycle.",
+                       "tags":  [
+                                    "pmcro",
+                                    "reflector-agent",
+                                    "reflect",
+                                    "lifecycle"
+                                ],
+                       "examples":  [
+                                        "@reflector-agent /reflector:reflect [checker-record-path]"
+                                    ],
+                       "inputModes":  [
+                                          "text/plain"
+                                      ],
+                       "outputModes":  [
+                                           "text/plain"
+                                       ]
+                   }
+               ]
+}
